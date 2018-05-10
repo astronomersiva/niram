@@ -2,6 +2,7 @@
   "name": "niram",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://astronomersiva.github.io/niram",
   "dependencies": {
     "babel-plugin-emotion": "^9.1.2",
     "emotion": "^9.1.3",
