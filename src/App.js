@@ -149,6 +149,8 @@ class App extends Component {
       activeColor
     } = this.state;
 
+    let dropzoneRef;
+
     const ColorBlocks = colors.map((color) => {
       return <Color key={color} color={color} changeTitleColor={this.changeTitleColor} />;
     });
@@ -157,7 +159,7 @@ class App extends Component {
 
     const FileInput = <input type="text" className={InputStyle} onChange={this.applyMimeTypes} />;
 
-    const DropHere = <div className={DropHereStyle}>Drop An Image</div>;
+    const DropHere = <div onClick={() => { dropzoneRef.open() }} className={DropHereStyle}>Drop An Image</div>;
 
     const MainContent = isEmpty ? DropHere : ColorBlocks;
 
@@ -176,6 +178,7 @@ class App extends Component {
           className={DropzoneStyle}
           accept={accept}
           multiple={false}
+          ref={(node) => { dropzoneRef = node;}}
           onDrop={this.onDrop}
           onDragEnter={this.onDragEnter}
           onDragLeave={this.onDragLeave}>
