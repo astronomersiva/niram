@@ -3,14 +3,15 @@ import styled from 'react-emotion';
 
 const Block = styled('div')`
   display: inline-block;
-  height: 200px;
-  width: 200px;
+  height: 15vw;
+  width: 15vw;
   border: 3px solid transparent;
+  transition: border 0.2s;
+
   background-color: ${(props) => {
     const { color = [0, 0, 0] } = props;
     return `rgb(${color.join(',')})`;
   }};
-  transition: border 0.2s;
 
   &:hover {
     border: 3px solid white;
@@ -19,8 +20,8 @@ const Block = styled('div')`
 
 class Color extends Component {
   handleHover = () => {
-    const { color } = this.props;
-    this.props.changeTitleColor(color);
+    const { color, changeTitleColor } = this.props;
+    changeTitleColor(color);
   };
 
   render() {
