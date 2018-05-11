@@ -18,8 +18,13 @@ const Block = styled('div')`
 `;
 
 class Color extends Component {
+  handleHover = () => {
+    const { color } = this.props;
+    this.props.changeTitleColor(color);
+  };
+
   render() {
-    return <Block color={this.props.color}/>;
+    return <Block color={this.props.color} onMouseOver={this.handleHover} />;
   }
 }
 

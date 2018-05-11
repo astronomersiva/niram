@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import styled, { css } from 'react-emotion';
 import getPixels from 'get-pixels';
 import palette from 'get-rgba-palette';
@@ -14,15 +14,25 @@ const Container = styled('div')`
   justify-content: center;
   align-items: center;
   font-size: 52px;
+  color: ${(props) => {
+    const { color = [142, 142, 142] } = props;
+    return `rgb(${color.join(',')})`;
+  }};
+  text-shadow: ${(props) => {
+    const { color = [142, 142, 142] } = props;
+    return `0px 0px 7px rgb(${color.join(',')})`;
+  }};
+  transition: color 0.2s;
 `;
 
-const colorBlocks = css`
+const colorBlocksStyle = css`
   margin-top: 150px;
 `;
 
 class App extends Component {
   state = {
-    colors: []
+    colors: [],
+    activeColor: []
   };
 
   getColors = () => {
@@ -37,19 +47,21 @@ class App extends Component {
     });
   };
 
+  changeTitleColor = (color) => {
+    this.setState({ activeColor: color });
+  };
+
   render() {
     const { colors } = this.state;
+    const colorBlocks = colors.map((color) => {
+      return <Color key={color} color={color} changeTitleColor={this.changeTitleColor} />;
+    });
+
     return (
-      <Fragment>
-        <Container onClick={this.getColors}>niram</Container>
-        <div className={colorBlocks}>
-          {
-            colors.map((color) => {
-              return <Color key={color} color={color} />
-            })
-          }
-        </div>
-      </Fragment>
+      <div>
+        <Container onClick={this.getColors} color={this.state.activeColor}>niram</Container>
+        <div className={colorBlocksStyle}>{colorBlocks}</div>
+      </div>
     );
   }
 }
