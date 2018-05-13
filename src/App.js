@@ -64,6 +64,11 @@ const DropHereStyle = css`
   font-size: 6vh;
 `;
 
+const LoadingStyle = css`
+  font-size: 6vh;
+  color: rgb(142, 142, 142);
+`;
+
 const OverlayStyle = css`
   ${DropHereStyle};
   background: rgba(0, 0, 0, 0.5);
@@ -74,6 +79,7 @@ class App extends Component {
     colors: [],
     activeColor: [],
     isEmpty: true,
+    isLoading: false,
     accept: 'image/jpeg, image/png',
     files: [],
     dropzoneActive: false
@@ -90,7 +96,8 @@ class App extends Component {
   onDrop = (files) => {
     this.setState({
       files,
-      dropzoneActive: false
+      dropzoneActive: false,
+      isLoading: true
     });
 
     files.forEach((file) => {
@@ -102,8 +109,8 @@ class App extends Component {
         this.getColors(fileContent);
       };
 
-      reader.onabort = () => this.setState({ isEmpty: true });
-      reader.onerror = () => this.setState({ isEmpty: true });
+      reader.onabort = () => this.setState({ isLoading: false, isEmpty: true });
+      reader.onerror = () => this.setState({ isLoading: false, isEmpty: true });
     });
   };
 
@@ -115,6 +122,7 @@ class App extends Component {
     return getPixels(image, (err, pixels) => {
       if (err) {
         console.log(`Errored - ${err}`);
+        this.setState({ isLoading: false, isEmpty: true });
 
         return;
       }
@@ -122,6 +130,7 @@ class App extends Component {
       const colors = palette(pixels.data);
       this.setState({
         isEmpty: false,
+        isLoading: false,
         colors
       });
     });
@@ -146,11 +155,14 @@ class App extends Component {
       accept,
       dropzoneActive,
       isEmpty,
+      isLoading,
       activeColor
     } = this.state;
 
     let dropzoneRef;
 
+    const Loading = <div className={LoadingStyle}>Extracting Colors</div>;
+  
     const ColorBlocks = colors.map((color) => {
       return <Color key={color} color={color} changeTitleColor={this.changeTitleColor} />;
     });
@@ -187,7 +199,7 @@ class App extends Component {
             {DropFilesHere}
             {FileInput}
             {ColorCode}
-            {MainContent}
+            {isLoading ? Loading : MainContent}
           </div>
         </Dropzone>
       </div>
