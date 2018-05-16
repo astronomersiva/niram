@@ -37,6 +37,7 @@ const SourceLink = styled('span')`
   right: 5vw;
   font-size: 2vh;
   color: #484848;
+  text-shadow: none;
 `;
 
 const colorBlocksStyle = css`
