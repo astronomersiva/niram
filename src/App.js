@@ -16,7 +16,6 @@ import Color from './Color';
 // css in js :P
 const Header = styled('div')`
   background: #111;
-  text-align: center;
   height: 15vh;
   display: flex;
   justify-content: center;
@@ -31,6 +30,13 @@ const Header = styled('div')`
     const { color = [142, 142, 142] } = props;
     return `0px 0px 7px rgb(${color.join(',')})`;
   }};
+`;
+
+const SourceLink = styled('span')`
+  position: absolute;
+  right: 5vw;
+  font-size: 2vh;
+  color: #484848;
 `;
 
 const colorBlocksStyle = css`
@@ -183,7 +189,12 @@ class App extends Component {
 
     return (
       <div>
-        <Header color={activeColor}>niram</Header>
+        <Header color={activeColor}>
+          niram
+          <SourceLink onClick={()=> window.open("https://github.com/astronomersiva/niram", "_blank")}>
+            &lt; &#47;&gt;
+          </SourceLink>
+        </Header>
 
         <Dropzone
           disableClick
