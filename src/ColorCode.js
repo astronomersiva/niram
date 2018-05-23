@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hot } from 'react-hot-loader';
 import { css } from 'react-emotion';
 
 const hexCodeStyle = css`
@@ -28,4 +29,4 @@ class ColorCode extends Component {
   }
 }
 
-export default ColorCode;
+export default hot(module)(ColorCode);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { hot } from 'react-hot-loader';
 
 // file upload
 import Dropzone from 'react-dropzone';
@@ -8,41 +9,16 @@ import getPixels from 'get-pixels';
 import palette from 'get-rgba-palette';
 
 // css in js :P
-import styled, { css } from 'react-emotion';
+import { css } from 'react-emotion';
 
 // components
 import Loading from './Loading';
 import Color from './Color';
 import FileInput from './FileInput';
 import ColorCode from './ColorCode';
+import Header from './Header';
 
 // css in js :P
-const Header = styled('div')`
-  background: #111;
-  height: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 8vh;
-  transition: color 0.2s;
-  color: ${props => {
-    const { color = [142, 142, 142] } = props;
-    return `rgb(${color.join(',')})`;
-  }};
-  text-shadow: ${props => {
-    const { color = [142, 142, 142] } = props;
-    return `0px 0px 7px rgb(${color.join(',')})`;
-  }};
-`;
-
-const SourceLink = styled('span')`
-  position: absolute;
-  right: 5vw;
-  font-size: 2vh;
-  color: #484848;
-  text-shadow: none;
-`;
-
 const colorBlocksStyle = css`
   padding: 6vw 0;
   min-height: 60vh;
@@ -162,6 +138,7 @@ class App extends Component {
     ) : (
       ''
     );
+
     const DropHere = (
       <div
         onClick={() => {
@@ -172,21 +149,12 @@ class App extends Component {
         Drop An Image
       </div>
     );
+
     const MainContent = isEmpty ? DropHere : ColorBlocks;
 
     return (
       <div>
-        <Header color={activeColor}>
-          niram
-          <SourceLink
-            onClick={() =>
-              window.open('https://github.com/astronomersiva/niram', '_blank')
-            }
-          >
-            &lt; &#47;&gt;
-          </SourceLink>
-        </Header>
-
+        <Header activeColor={activeColor} />
         <Dropzone
           disableClick
           className={DropzoneStyle}
@@ -211,4 +179,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default hot(module)(App);

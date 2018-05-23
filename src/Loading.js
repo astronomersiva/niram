@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'react-emotion';
+import { hot } from 'react-hot-loader';
 
 const LoadingStyle = css`
   font-size: 6vh;
@@ -12,4 +13,4 @@ class Loading extends Component {
   }
 }
 
-export default Loading;
+export default hot(module)(Loading);

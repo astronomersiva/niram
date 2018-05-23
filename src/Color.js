@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
+import { hot } from 'react-hot-loader';
 
 const Block = styled('div')`
   display: inline-block;
@@ -29,4 +30,4 @@ class Color extends Component {
   }
 }
 
-export default Color;
+export default hot(module)(Color);
