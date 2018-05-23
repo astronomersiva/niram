@@ -8,7 +8,7 @@ const Block = styled('div')`
   border: 3px solid transparent;
   transition: border 0.2s;
 
-  background-color: ${(props) => {
+  background-color: ${props => {
     const { color = [0, 0, 0] } = props;
     return `rgb(${color.join(',')})`;
   }};
