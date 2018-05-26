@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ColorCode /> converts rgb array to hex code 1`] = `
+<div
+  className="css-185dxra"
+>
+  #ff0000
+</div>
+`;
+
+exports[`<ColorCode /> is empty when no rgb array is passed 1`] = `
+<div
+  className="css-185dxra"
+>
+  
+</div>
+`;
